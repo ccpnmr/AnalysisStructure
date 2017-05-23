@@ -33,8 +33,6 @@ __date__ = "$Date: 2017-04-07 10:28:40 +0000 (Fri, April 07, 2017) $"
 
 
 from ccpn.AnalysisAssign.AnalysisAssign import Assign
-from ccpn.ui.gui.modules.CcpnModule import CcpnModule
-from ccpn.ui.gui.widgets import MessageDialog
 
 
 class Structure(Assign):
@@ -44,140 +42,8 @@ class Structure(Assign):
     Assign.__init__(self, applicationName, applicationVersion, commandLineArguments)
 
 
-  # def setupMenus(self):
-  #   super().setupMenus()
-  #   menuSpec = ('Assign', [("Setup NmrResidues", self.showSetupNmrResiduesPopup, [('shortcut', 'sn')]),
-  #                          ("Pick and Assign", self.showPickAndAssignModule, [('shortcut', 'pa')]),
-  #                          (),
-  #                          ("Backbone Assignment", self.showBackboneAssignmentModule, [('shortcut', 'bb')]),
-  #                          ("Sidechain Assignment", self.showSidechainAssignmentModule, [('shortcut', 'sc')]),
-  #                          (),
-  #                          ("Peak Assigner", self.showPeakAssigner, [('shortcut', 'aa')]),
-  #                          ("Assignment Inspector", self.showAssignmentInspectorModule, [('shortcut', 'ai')]),
-  #                          ("Residue Information", self.showResidueInformation, [('shortcut', 'ri')]),
-  #                         ])
-  #   self.addApplicationMenuSpec(menuSpec)
-
-  # # overrides superclass
-  # def _closeExtraWindows(self):
-  #
-  #   # remove links to modules when closing them
-  #   for attr in ('sequenceGraph', 'backboneModule', 'sidechainAssignmentModule'):
-  #     if hasattr(self, attr):
-  #       delattr(self, attr)
-  #
-  #   Framework._closeExtraWindows(self)
-  #
-  # def showSetupNmrResiduesPopup(self):
-  #   if not self.project.peakLists:
-  #     self.project._logger.warn('No peaklists in project. Cannot assign peaklists.')
-  #     MessageDialog.showWarning('No peaklists in project.', 'Cannot assign peaklists.')
-  #   else:
-  #     from ccpn.ui.gui.popups.SetupNmrResiduesPopup import SetupNmrResiduesPopup
-  #     popup = SetupNmrResiduesPopup(self.ui.mainWindow, self.project)
-  #     popup.exec_()
-  #
-  # def showPickAndAssignModule(self, position:str='bottom', relativeTo:CcpnModule=None):
-  #   """
-  #   Displays Pick and Assign module.
-  #   """
-  #   from ccpn.AnalysisAssign.modules.PickAndAssignModule import PickAndAssignModule
-  #
-  #   mainWindow = self.ui.mainWindow
-  #   #FIXME:ED - crashes sometimes opening a module
-  #   if not relativeTo:
-  #     relativeTo = mainWindow.moduleArea    # ejb
-  #   self.pickAndAssignModule = PickAndAssignModule(mainWindow=mainWindow)
-  #   mainWindow.moduleArea.addModule(self.pickAndAssignModule, position=position, relativeTo=relativeTo)
-  #   mainWindow.pythonConsole.writeConsoleCommand("application.showPickAndAssignModule()")
-  #   self.project._logger.info("application.showPickAndAssignModule()")
-  #   return self.pickAndAssignModule
-  #
-  #
-  # def showBackboneAssignmentModule(self, position:str='bottom', relativeTo:CcpnModule=None):
-  #   """
-  #   Displays Backbone Assignment module.
-  #   """
-  #   from ccpn.AnalysisAssign.modules.BackboneAssignmentModule import BackboneAssignmentModule
-  #
-  #   mainWindow = self.ui.mainWindow
-  #   #FIXME:ED - crashes sometimes opening a module
-  #   if not relativeTo:
-  #     relativeTo = mainWindow.moduleArea    # ejb
-  #   self.backboneModule = BackboneAssignmentModule(mainWindow=mainWindow)
-  #   mainWindow.moduleArea.addModule(self.backboneModule, position=position, relativeTo=relativeTo)
-  #   mainWindow.pythonConsole.writeConsoleCommand("application.showBackboneAssignmentModule()")
-  #   self.project._logger.info("application.showBackboneAssignmentModule()")
-  #   return self.backboneModule
-  #
-  #
-  # def showSidechainAssignmentModule(self, position:str='bottom', relativeTo:CcpnModule=None):
-  #   """
-  #   Displays Backbone Assignment module.
-  #   """
-  #   MessageDialog.showWarning('PickandAssignModule',
-  #                             'SideChainAssignmentModule.py (16-20)\n'
-  #                             'Not implemented yet')
-  #   return
-  #
-  #   from ccpn.AnalysisAssign.modules.SideChainAssignmentModule import SideChainAssignmentModule
-  #
-  #   if hasattr(self, 'sidechainAssignmentModule'):
-  #     return
-  #
-  #   mainWindow = self.ui.mainWindow
-  #   #FIXME:ED - crashes sometimes opening a module
-  #   if not relativeTo:
-  #     relativeTo = mainWindow.moduleArea    # ejb
-  #   self.sidechainAssignmentModule = SideChainAssignmentModule(mainWindow=mainWindow)   # ejb self, self.project)
-  #   mainWindow.moduleArea.addModule(self.sidechainAssignmentModule, position=position, relativeTo=relativeTo)
-  #   mainWindow.pythonConsole.writeConsoleCommand("application.showSidechainAssignmentModule()")
-  #   self.project._logger.info("application.showSidechainAssignmentModule()")
-  #
-  #   return self.sidechainAssignmentModule
-  #
-  #
-  # def showPeakAssigner(self, position='bottom', relativeTo=None):
-  #   """Displays peak assignment module."""
-  #   from ccpn.ui.gui.modules.PeakAssigner import PeakAssigner
-  #
-  #   mainWindow = self.ui.mainWindow
-  #   #FIXME:ED - crashes sometimes opening a module
-  #   if not relativeTo:
-  #     relativeTo = mainWindow.moduleArea    # ejb
-  #   self.assignmentModule = PeakAssigner(mainWindow=mainWindow)
-  #   mainWindow.moduleArea.addModule(self.assignmentModule, position=position, relativeTo=relativeTo)
-  #   mainWindow.pythonConsole.writeConsoleCommand("application.showAssignmentModule()")
-  #   self.project._logger.info("application.showAssignmentModule()")
-  #
-  #
-  # def showResidueInformation(self, position: str='bottom', relativeTo:CcpnModule=None):
-  #   """Displays Residue Information module."""
-  #   from ccpn.ui.gui.modules.ResidueInformation import ResidueInformation
-  #   if not self.project.residues:
-  #     self.project._logger.warn('No Residues in project. Residue Information Module requires Residues in the project to launch.')
-  #     MessageDialog.showWarning('No Residues in project.',
-  #                               'Residue Information Module requires Residues in the project to launch.')
-  #     return
-  #
-  #   mainWindow = self.ui.mainWindow
-  #   #FIXME:ED - crashes sometimes opening a module
-  #   if not relativeTo:
-  #     relativeTo = mainWindow.moduleArea    # ejb
-  #   self.residueModule = ResidueInformation(mainWindow=mainWindow)
-  #   mainWindow.moduleArea.addModule(self.residueModule, position=position, relativeTo=relativeTo)
-  #   mainWindow.pythonConsole.writeConsoleCommand("application.showResidueInformation()")
-  #   self.project._logger.info("application.showResidueInformation()")
-  #
-  #
-  # def showAssignmentInspectorModule(self, nmrAtom=None, position: str='bottom', relativeTo:CcpnModule=None):
-  #   from ccpn.AnalysisAssign.modules.AssignmentInspectorModule import AssignmentInspectorModule
-  #
-  #   mainWindow = self.ui.mainWindow
-  #   #FIXME:ED - crashes sometimes opening a module
-  #   if not relativeTo:
-  #     relativeTo = mainWindow.moduleArea    # ejb
-  #   self.assignmentInspectorModule = AssignmentInspectorModule(mainWindow=mainWindow)
-  #   mainWindow.moduleArea.addModule(self.assignmentInspectorModule, position=position, relativeTo=relativeTo)
-  #   mainWindow.pythonConsole.writeConsoleCommand("application.showAssignmentInspectorModule()")
-  #   self.project._logger.info("application.showAssignmentInspectorModule()")
+  def setupMenus(self):
+    super().setupMenus()
+    menuSpec = ('Structure', [(),
+                             ])
+    self.addApplicationMenuSpec(menuSpec, position=4)
