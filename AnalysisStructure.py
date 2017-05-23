@@ -41,7 +41,7 @@ class Structure(Assign):
   """Root class for Structure application"""
 
   def __init__(self, applicationName, applicationVersion, commandLineArguments):
-    AnalysisAssign.__init__(self, applicationName, applicationVersion, commandLineArguments)
+    Assign.__init__(self, applicationName, applicationVersion, commandLineArguments)
 
 
   # def setupMenus(self):
