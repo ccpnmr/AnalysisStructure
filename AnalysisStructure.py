@@ -56,10 +56,10 @@ class Structure(Assign):
     self.structureTableModule = StructureTableModule(mainWindow=mainWindow
                                                 , structureEnsemble=structureEnsemble)
 
-    self.project.newModule(moduleType=self.structureTableModule.className
-                           , title=None
-                           , window=mainWindow
-                           , comment='')
+    # self.project.newModule(moduleType=self.structureTableModule.className
+    #                        , title=None
+    #                        , window=mainWindow
+    #                        , comment='')
 
     mainWindow.moduleArea.addModule(self.structureTableModule, position=position, relativeTo=relativeTo)
 
