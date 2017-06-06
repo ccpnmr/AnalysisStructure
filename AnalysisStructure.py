@@ -31,6 +31,7 @@ __date__ = "$Date: 2017-04-07 10:28:40 +0000 (Fri, April 07, 2017) $"
 
 from ccpn.AnalysisAssign.AnalysisAssign import Assign
 from ccpn.util.Logging import getLogger
+from ccpn.ui.gui.widgets.FileDialog import FileDialog
 
 class Structure(Assign):
   """Root class for Structure application"""
@@ -39,10 +40,49 @@ class Structure(Assign):
     Assign.__init__(self, applicationName, applicationVersion, commandLineArguments)
 
   def setupMenus(self):
-    super().setupMenus()
-    menuSpec = ('Structure', [("Structure Table", self.showStructureTable, [('shortcut', 'st')]),
-                             ])
+    super(Structure, self).setupMenus()
+    menuSpec = ('Structure', [
+                              ("Load PDB", self.loadPDB, [('shortcut', 'lp')]),
+                              ("Load NEF", self.loadNEF, [('shortcut', 'ln')]),
+                              (),
+                              ("Structure Table", self.showStructureTable, [('shortcut', 'st')]),
+                              ("Match to Molecule", self.matchToMolecule, [('shortcut', 'mm'), ('enabled', False)]),
+                              ("Chain(s) from Structure", self.chainsFromStructure, [('shortcut', 'cs'), ('enabled', False)]),
+                              (),
+                              ("Find Consensus...", self.findConsensus, [('shortcut', 'fc'), ('enabled', False)]),
+                              ("Superpose", self.superpose, [('shortcut', 'sp'), ('enabled', False)]),
+                              (),
+                              ("Validate Restraints", self.validateRestraints, [('shortcut', 'vr'), ('enabled', False)]),
+                              (),
+                              ("Submit to wwPDB", self.submitToWWPDB, [('shortcut', 'sw'), ('enabled', False)]),
+    ])
     self.addApplicationMenuSpec(menuSpec, position=4)
+
+  def loadData(self, paths=None, text=None, filter=None):
+    if paths is None:
+      #TODO:LIST-AS-ISSUE: This fails for native file dialogs on OSX when trying to select a project (i.e. a directory)
+      # NBNB TBD I assume here that path is either a string or a list lf string paths.
+      # NBNB #FIXME if incorrect
+      dialog = FileDialog(parent=self.ui.mainWindow, fileMode=FileDialog.AnyFile, text=text
+                          , acceptMode=FileDialog.AcceptOpen
+                          , preferences=self.preferences.general
+                          , filter=filter)
+      path = dialog.selectedFile()
+      if not path:
+        return
+      paths = [path]
+
+    elif isinstance(paths, str):
+      paths = [paths]
+
+    for path in paths:
+      self.project.loadData(path)
+
+  def loadPDB(self):
+    self.loadData(text='Load PDB File', filter='*.pdb')
+
+  def loadNEF(self):
+    self.loadData(text='Load NEF File', filter='*.nef')
 
   def showStructureTable(self, position='bottom', relativeTo=None, structureEnsemble=None):
     """Displays Structure Table"""
@@ -66,4 +106,22 @@ class Structure(Assign):
     mainWindow.pythonConsole.writeConsoleCommand("application.showStructureTable()\n")
     getLogger().info("application.showStructureTable()")
     return self.structureTableModule
+
+  def matchToMolecule(self):
+    pass
+
+  def chainsFromStructure(self):
+    pass
+
+  def findConsensus(self):
+    pass
+
+  def superpose(self):
+    pass
+
+  def validateRestraints(self):
+    pass
+
+  def submitToWWPDB(self):
+    pass
 
