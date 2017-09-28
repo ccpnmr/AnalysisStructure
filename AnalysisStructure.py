@@ -84,28 +84,29 @@ class Structure(Assign):
   def loadNEF(self):
     self.loadData(text='Load NEF File', filter='*.nef')
 
-  def showStructureTable(self, position='bottom', relativeTo=None, structureEnsemble=None):
-    """Displays Structure Table"""
-    from ccpn.ui.gui.modules.StructureTable import StructureTableModule
-
-    mainWindow = self.ui.mainWindow
-
-    #FIXME:ED - sometimes crashes
-    if not relativeTo:
-      relativeTo = mainWindow.moduleArea      # ejb
-    self.structureTableModule = StructureTableModule(mainWindow=mainWindow
-                                                , structureEnsemble=structureEnsemble)
-
-    # self.project.newModule(moduleType=self.structureTableModule.className
-    #                        , title=None
-    #                        , window=mainWindow
-    #                        , comment='')
-
-    mainWindow.moduleArea.addModule(self.structureTableModule, position=position, relativeTo=relativeTo)
-
-    mainWindow.pythonConsole.writeConsoleCommand("application.showStructureTable()\n")
-    getLogger().info("application.showStructureTable()")
-    return self.structureTableModule
+  # Should inherit from Framework
+  # def showStructureTable(self, position='bottom', relativeTo=None, structureEnsemble=None):
+  #   """Displays Structure Table"""
+  #   from ccpn.ui.gui.modules.StructureTable import StructureTableModule
+  #
+  #   mainWindow = self.ui.mainWindow
+  #
+  #   #FIXME:ED - sometimes crashes
+  #   if not relativeTo:
+  #     relativeTo = mainWindow.moduleArea      # ejb
+  #   self.structureTableModule = StructureTableModule(mainWindow=mainWindow
+  #                                               , structureEnsemble=structureEnsemble)
+  #
+  #   # self.project.newModule(moduleType=self.structureTableModule.className
+  #   #                        , title=None
+  #   #                        , window=mainWindow
+  #   #                        , comment='')
+  #
+  #   mainWindow.moduleArea.addModule(self.structureTableModule, position=position, relativeTo=relativeTo)
+  #
+  #   mainWindow.pythonConsole.writeConsoleCommand("application.showStructureTable()\n")
+  #   getLogger().info("application.showStructureTable()")
+  #   return self.structureTableModule
 
   def matchToMolecule(self):
     pass
