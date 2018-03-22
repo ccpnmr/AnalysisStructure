@@ -101,7 +101,7 @@ class Structure(Assign):
   #
   #   mainWindow.moduleArea.addModule(self.structureTableModule, position=position, relativeTo=relativeTo)
   #
-  #   mainWindow.pythonConsole.writeConsoleCommand("application.showStructureTable()\n")
+  #   mainWindow.pythonConsole.writeConsoleCommand("application.showStructureTable()")
   #   getLogger().info("application.showStructureTable()")
   #   return self.structureTableModule
 
