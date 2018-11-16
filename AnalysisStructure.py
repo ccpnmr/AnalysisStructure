@@ -60,10 +60,10 @@ class Structure(Assign):
       #TODO:LIST-AS-ISSUE: This fails for native file dialogs on OSX when trying to select a project (i.e. a directory)
       # NBNB TBD I assume here that path is either a string or a list lf string paths.
       # NBNB #FIXME if incorrect
-      dialog = FileDialog(parent=self.ui.mainWindow, fileMode=FileDialog.AnyFile, text=text
-                          , acceptMode=FileDialog.AcceptOpen
-                          , preferences=self.preferences.general
-                          , filter=filter)
+      dialog = FileDialog(parent=self.ui.mainWindow, fileMode=FileDialog.AnyFile, text=text,
+                          acceptMode=FileDialog.AcceptOpen,
+                          preferences=self.preferences.general,
+                          filter=filter)
       path = dialog.selectedFile()
       if not path:
         return
@@ -91,13 +91,13 @@ class Structure(Assign):
   #   #FIXME:ED - sometimes crashes
   #   if not relativeTo:
   #     relativeTo = mainWindow.moduleArea      # ejb
-  #   self.structureTableModule = StructureTableModule(mainWindow=mainWindow
-  #                                               , structureEnsemble=structureEnsemble)
+  #   self.structureTableModule = StructureTableModule(mainWindow=mainWindow,
+  #                                               structureEnsemble=structureEnsemble)
   #
-  #   # self.project.newModule(moduleType=self.structureTableModule.className
-  #   #                        , title=None
-  #   #                        , window=mainWindow
-  #   #                        , comment='')
+  #   # self.project.newModule(moduleType=self.structureTableModule.className,
+  #   #                        title=None,
+  #   #                        window=mainWindow,
+  #   #                        comment='')
   #
   #   mainWindow.moduleArea.addModule(self.structureTableModule, position=position, relativeTo=relativeTo)
   #
