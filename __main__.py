@@ -6,7 +6,7 @@ __credits__ = ("Wayne Boucher, Ed Brooksbank, Rasmus H Fogh, Luca Mureddu, Timot
 __licence__ = ("CCPN licence. See http://www.ccpn.ac.uk/v3-software/downloads/license",
                "or ccpnmodel.ccpncore.memops.Credits.CcpnLicense for licence text")
 __reference__ = ("For publications, please use reference from http://www.ccpn.ac.uk/v3-software/downloads/license",
-               "or ccpnmodel.ccpncore.memops.Credits.CcpNmrReference")
+                 "or ccpnmodel.ccpncore.memops.Credits.CcpNmrReference")
 #=========================================================================================
 # Last code modification
 #=========================================================================================
@@ -27,15 +27,18 @@ from ccpn.framework import Framework
 from ccpn.AnalysisStructure.AnalysisStructure import Structure as Application
 from ccpn.framework.Version import applicationVersion
 
+
 if __name__ == '__main__':
-  from ccpn.util.GitTools import getAllRepositoriesGitCommit
-  applicationVersion = 'development: {AnalysisAssign:.8s}'.format(**getAllRepositoriesGitCommit())
+    from ccpn.util.GitTools import getAllRepositoriesGitCommit
 
-  # argument parser
-  parser = Framework.defineProgramArguments()
 
-  # add any additional commandline argument here
-  commandLineArguments = parser.parse_args()
+    applicationVersion = 'development: {AnalysisAssign:.8s}'.format(**getAllRepositoriesGitCommit())
 
-  application = Application(Framework.AnalysisStructure, applicationVersion, commandLineArguments)
-  application.start()
+    # argument parser
+    parser = Framework.defineProgramArguments()
+
+    # add any additional commandline argument here
+    commandLineArguments = parser.parse_args()
+
+    application = Application(Framework.AnalysisStructure, applicationVersion, commandLineArguments)
+    application.start()
